@@ -3,7 +3,7 @@ var router = require('express').Router();
 var Hotel = require('../models').Hotel;
 var Restaurant = require('../models').Restaurant;
 var Activity = require('../models').Activity;
-let apiRoutes  = require('/api/');
+let apiRoutes  = require('./api/');
 
 // router.get('/', function(req, res, next) {
 //   Promise.all([
@@ -25,7 +25,7 @@ router.get('/', function(req, res, next) {
   res.render('index');
 });
 
-router.use('/api', apiRoutes);
+
 
 router.get('/:tableName', function(req, res, next) {
   let parsedTable;
@@ -45,5 +45,7 @@ router.get('/:tableName', function(req, res, next) {
   })
   .catch(next)
 });
+
+router.use('/', apiRoutes);
 
 module.exports = router;

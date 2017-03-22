@@ -2,7 +2,7 @@ let router = require('express').Router();
 
 //retrieving a day
 router.get('/:day/',function(req,res,next){
-
+  res.send('works');
 });
 
 //updating a day

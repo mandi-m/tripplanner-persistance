@@ -1,5 +1,5 @@
 let router = require('express').Router();
-let dayRouter = require('/days');
+let dayRouter = require('./days');
 
 router.use('/day', dayRouter);
 
