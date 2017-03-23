@@ -46,6 +46,6 @@ router.get('/:tableName', function(req, res, next) {
   .catch(next)
 });
 
-router.use('/', apiRoutes);
+router.use('/api/', apiRoutes);
 
 module.exports = router;

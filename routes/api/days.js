@@ -12,7 +12,8 @@ router.put('/:day/', function(req,res,next){
 
 //adding a day
 router.post('/:day/', function(req,res,next){
-
+  console.log(req.params.day);
+  res.send("You're a winner!");
 })
 
 //deleting a day
