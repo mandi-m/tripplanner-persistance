@@ -40,7 +40,7 @@ var dayModule = (function () {
     this.activities = this.activities.map(attractionsModule.getEnhanced);
     // remainder of constructor
     this.buildButton().showButton();
-    $.post(`/api/days/${this.number}`,this);
+
   }
 
   // automatic day button handling

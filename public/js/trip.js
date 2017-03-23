@@ -51,7 +51,7 @@ var tripModule = (function () {
   // ~~~~~~~~~~~~~~~~~~~~~~~
     // `addDay` may need to take information now that we can persist days -- we want to display what is being sent from the DB
   // ~~~~~~~~~~~~~~~~~~~~~~~
-  function addDay () { 
+  function addDay () {
     if (this && this.blur) this.blur(); // removes focus box from buttons
     var newDay = dayModule.create({ number: days.length + 1 }); // dayModule
     days.push(newDay);
@@ -59,6 +59,7 @@ var tripModule = (function () {
       currentDay = newDay;
     }
     switchTo(newDay);
+    $.post('/api/days', {number: newDay.number});
   }
 
   // ~~~~~~~~~~~~~~~~~~~~~~~
