@@ -105,19 +105,19 @@ var dayModule = (function () {
       case 'hotel':
         if (this.hotel) this.hotel.hide();
         this.hotel = attraction;
+
         break;
       case 'restaurant':
         utilsModule.pushUnique(this.restaurants, attraction);
+
         break;
       case 'activity':
         utilsModule.pushUnique(this.activities, attraction);
         break;
       default: console.error('bad type:', attraction);
     }
-    // activating UI
-//    $.post(`/api/days/${this.number}/${attraction.type}`, attraction);
-        $.post('/api/days/1/hotel', {name: attraction.name, type: attraction.type});
 
+    $.post(`/api/days/${this.number}/${attraction.type}`, {id: attraction.id});
 
     attraction.show();
   };
@@ -141,6 +141,12 @@ var dayModule = (function () {
         break;
       default: console.error('bad type:', attraction);
     }
+    $.ajax({
+      url: `/api/days/${this.number}/${attraction.type}`,
+      type: 'DELETE',
+      body: {id: attraction.id}
+    });
+
     // deactivating UI
     attraction.hide();
   };

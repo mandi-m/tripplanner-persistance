@@ -35,28 +35,69 @@ router.get('/', function(req,res,next){
 })
 
 
-router.post('/:dayId/hotel', function(req,res,next){
+router.post('/:dayNum/hotel', function(req,res,next){
 
   var currentDay;
 
   Day.find({
     where: {
-      number: req.params.dayId
+      number: req.params.dayNum
     }
   })
   .then(function(day){
     currentDay = day;
     return Hotel.find({
       where: {
-        name: req.body.name
+        id: req.body.id
       }
     })
   })
   .then(function(hotel){
-    console.log(currentDay, hotel.name);
     currentDay.setHotel(hotel);
     currentDay.save();
     res.status(201).send();
+  })
+  .catch(next)
+})
+
+router.post('/:dayNum/restaurant', function(req,res,next){
+
+  var currentDay;
+
+  Day.find({
+    where: {
+      number: req.params.dayNum
+    }
+  })
+  .then(function(day){
+    currentDay = day;
+    return Restaurant.findById(req.body.id)
+  })
+  .then(function(restaurant){
+    currentDay.addRestaurant(restaurant);
+    currentDay.save();
+    res.status(201).send();
+  })
+  .catch(next)
+})
+
+router.delete('/:dayNum/restaurant', function(req,res,next){
+
+  var currentDay;
+
+  Day.find({
+    where: {
+      number: req.params.dayNum
+    }
+  })
+  .then(function(day){
+    currentDay = day;
+    return Restaurant.findById(req.body.id)
+  })
+  .then(function(restaurant){
+    currentDay.removeRestaurant(restaurant);
+    currentDay.save();
+    res.status(200).send();
   })
   .catch(next)
 })

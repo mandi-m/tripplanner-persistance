@@ -54,7 +54,7 @@ var tripModule = (function () {
 
   function addDay (databaseDay) {
     var newDay;
-    if(!arguments.length){
+    if(!arguments[0].number){
     if (this && this.blur) this.blur(); // removes focus box from buttons
       newDay = dayModule.create({ number: days.length + 1 }); // dayModule
       $.post('/api/days', {number: newDay.number});
@@ -86,6 +86,22 @@ var tripModule = (function () {
     previousDay.hideButton();
   }
 
+  function loader(){
+    $.get('/api/days')
+    .then(function(allDays){
+      if(allDays.length){
+          allDays.forEach(function(x){
+            addDay(x);
+          })
+      } else {
+        addDay();
+      }
+    })
+    .catch(function(){
+      throw new Error("Could not find days.")
+    })
+  }
+
   // globally accessible module methods
 
   var publicAPI = {
@@ -95,24 +111,11 @@ var tripModule = (function () {
         //If we are trying to load existing Days, then let's make a request to the server for the day. Remember this is async. For each day we get back what do we need to do to it?
       // ~~~~~~~~~~~~~~~~~~~~~~~
 
-
+      return loader();
       //$(addDay);
 
 
-      $.get('/api/days')
-      .then(function(allDays){
-              console.log(allDays);
-        if(allDays.length){
-            allDays.forEach(function(x){
-              addDay(x);
-            })
-        } else {
-          addDay();
-        }
-      })
-      .catch(function(){
-        throw new Error("Could not find days.")
-      })
+
 
 
     },
