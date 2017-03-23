@@ -144,7 +144,7 @@ var dayModule = (function () {
     $.ajax({
       url: `/api/days/${this.number}/${attraction.type}`,
       type: 'DELETE',
-      body: {id: attraction.id}
+      data: {id: attraction.id}
     });
 
     // deactivating UI
