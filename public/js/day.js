@@ -1,6 +1,7 @@
 'use strict';
 /* global $ utilsModule tripModule attractionsModule */
 
+
 /**
  * A module for constructing front-end `day` objects, optionally from back-end
  * data, and managing the `attraction`s associated with a day.

@@ -2,6 +2,7 @@ let router = require('express').Router();
 let path = require('path');
 let Day = require('../../models/day');
 let Hotel = require('../../models/hotel');
+let Restaurant = require('../../models/restaurant');
 
 //retrieving a day
 router.get('/:day/',function(req,res,next){
@@ -18,6 +19,17 @@ router.post('/', function(req,res,next){
   Day.create({number: req.body.number})
   .then(function(){
     res.status(201).send();
+  })
+  .catch(next)
+})
+
+router.get('/', function(req,res,next){
+  Day.findAll({
+    include: [{ all: true}],
+    order: [['number']]
+  })
+  .then(function(allDays){
+    res.send(allDays)
   })
   .catch(next)
 })

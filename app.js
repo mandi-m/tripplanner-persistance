@@ -25,6 +25,15 @@ app.use('/jquery', express.static(path.join(__dirname, '/node_modules/jquery/dis
 // serve any other static files
 app.use(express.static(path.join(__dirname, '/public')));
 
+app.get('/reset', function (req, res, next){
+  console.log(db);
+  db.models.day.sync({force: true})
+  .then(function(){
+    res.redirect('/');
+  })
+  .catch(next)
+})
+
 // serve dynamic routes
 app.use(require('./routes'));
 
