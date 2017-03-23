@@ -114,6 +114,10 @@ var dayModule = (function () {
       default: console.error('bad type:', attraction);
     }
     // activating UI
+//    $.post(`/api/days/${this.number}/${attraction.type}`, attraction);
+        $.post('/api/days/1/hotel', {name: attraction.name, type: attraction.type});
+
+
     attraction.show();
   };
 
